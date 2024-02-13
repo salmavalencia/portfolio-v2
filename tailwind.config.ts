@@ -21,6 +21,17 @@ const config: Config = {
         "2xl": "1100px",
       },
     },
+    colors: {
+      font: {
+        "primary": "#ccd6f6",
+        "secondary": "#8892b0",
+      },
+      green: "#64ffda",
+      navy: {
+        light: "#112240",
+        dark: "#0a192f"
+      }
+    }
   },
   plugins: [],
 }
