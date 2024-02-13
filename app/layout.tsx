@@ -1,9 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter, Roboto_Mono } from 'next/font/google'
-//Roboto_Mono
+import { Inter } from 'next/font/google'
+
 const inter = Inter({ subsets: ['latin']})
-const robotoMono = Roboto_Mono({ subsets: ['latin'] , variable: '--font-roboto-mono'})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,13 +16,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <style>
-        {`
-          :root {
-            --font-roboto-mono: ${robotoMono.style.fontFamily};
-          }
-        `}
-      </style>
       <body className={inter.className}>{children}</body>
     </html>
   )
