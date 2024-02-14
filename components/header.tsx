@@ -28,31 +28,33 @@ export default function Header() {
 
     return (
         <AnimatePresence>
-            <nav className={`px-6 py-4 md:px-10 md:py-8 flex justify-between items-center ${isOpen ? 'bg-navy-light' : 'shadow-lg shadow-black'}`}>
-                <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
-                    <Link href="#"><h1 className="text-2xl font-semibold text-green items-center">SV</h1></Link>
-                </motion.div>
-                <div className="font-mono">
-                    <div className="hidden md:block">
-                        <ul className="flex text-sm gap-2.5 lg:gap-6 items-center">
-                            <NavBar />
-                            <Button className="text-sm">Resume</Button>
-                        </ul>
-                    </div>
-                    <div ref={ref} className="md:hidden">
-                        <Hamburger color="#64ffda" toggled={isOpen} size={20} toggle={toggle} />
-                        {isOpen && (
-                            <motion.div
-                            initial={{ opacity: 0, scale: 1 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.4 }}
-                            >
-                            <ul className="text-center fixed left-0 shadow-4xl right-0 top-[5rem] py-8 flex flex-col gap-6 bg-navy-light">
+            <nav className={`backdrop-blur-xl backdrop-brightness-250 fixed px-6 py-4 md:px-10 md:py-8 w-full ${isOpen ? 'bg-navy-light' : 'shadow-lg shadow-black'}`}>
+                <div className="flex justify-between items-center">
+                    <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
+                        <Link href="#"><h1 className="text-2xl font-semibold text-green items-center">SV</h1></Link>
+                    </motion.div>
+                    <div className="font-mono">
+                        <div className="hidden md:block">
+                            <ul className="flex text-sm gap-2.5 lg:gap-6 items-center">
                                 <NavBar />
-                                <Button className="text-sm mt-6 mx-auto">Resume</Button>
+                                <Button className="text-sm">Resume</Button>
                             </ul>
-                            </motion.div>
-                        )}
+                        </div>
+                        <div ref={ref} className="md:hidden">
+                            <Hamburger color="#64ffda" toggled={isOpen} size={20} toggle={toggle} />
+                            {isOpen && (
+                                <motion.div
+                                initial={{ opacity: 0, scale: 1 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.4 }}
+                                >
+                                <ul className="text-center fixed left-0 shadow-4xl right-0 top-[5rem] py-8 flex flex-col gap-6 bg-navy-light">
+                                    <NavBar />
+                                    <Button className="text-sm mt-6 mx-auto">Resume</Button>
+                                </ul>
+                                </motion.div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </nav>
