@@ -1,35 +1,63 @@
 'use client'
-import { useState } from "react";
+
 import { Button } from "./ui/button";
 import { Squash as Hamburger } from "hamburger-react";
 import { useClickAway } from "react-use";
 import { useRef } from "react";
+import { create } from 'zustand';
+import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
+
+const useStore = create<Store>(set => ({
+    isOpen: false,
+    toggle: () => set((state: any) => ({ isOpen: !state.isOpen })),
+    close: () => set({ isOpen: false })
+}));
+
+type Store = {
+    isOpen: boolean;
+    toggle: () => void;
+    close: () => void;
+}
 
 export default function Header() {
-    let [isOpen, setIsOpen] = useState(false);
+    const { isOpen, toggle, close } = useStore();
+
     const ref = useRef(null);
-    useClickAway(ref, () => setIsOpen(false));
+    useClickAway(ref, close);
 
     return (
-        <nav className="px-10 py-8 flex justify-between items-center">
-            <h1 className="text-2xl font-semibold text-green items-center">SV</h1>
-            <div>
-                <div className="hidden md:block">
-                    <ul className="font-mono flex text-sm gap-6 items-center">
-                        <NavBar />
-                        <Button className="text-sm">Resume</Button>
-                        </ul>
-                </div>
-                <div ref={ref} className="md:hidden">
-                    <Hamburger color="#64ffda" toggled={isOpen} size={20} toggle={setIsOpen} />
-                    {isOpen && (
-                        <div className="fixed left-0 shadow-4xl right-0 top-[5rem] p-5 pt-0 bg-navy-light">
+        <AnimatePresence>
+            <nav className={`px-6 py-4 md:px-10 md:py-8 flex justify-between items-center ${isOpen ? 'bg-navy-light' : 'shadow-lg shadow-black'}`}>
+                <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
+                    <Link href="#"><h1 className="text-2xl font-semibold text-green items-center">SV</h1></Link>
+                </motion.div>
+                <div className="font-mono">
+                    <div className="hidden md:block">
+                        <ul className="flex text-sm gap-2.5 lg:gap-6 items-center">
                             <NavBar />
-                        </div>
-                    )}
+                            <Button className="text-sm">Resume</Button>
+                        </ul>
+                    </div>
+                    <div ref={ref} className="md:hidden">
+                        <Hamburger color="#64ffda" toggled={isOpen} size={20} toggle={toggle} />
+                        {isOpen && (
+                            <motion.div
+                            initial={{ opacity: 0, scale: 1 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.4 }}
+                            >
+                            <ul className="text-center fixed left-0 shadow-4xl right-0 top-[5rem] py-8 flex flex-col gap-6 bg-navy-light">
+                                <NavBar />
+                                <Button className="text-sm mt-6 mx-auto">Resume</Button>
+                            </ul>
+                            </motion.div>
+                        )}
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </AnimatePresence>
+
     )
 }
 
@@ -48,12 +76,12 @@ interface NavLinkProps {
     }
 }
 function NavLink({props} : NavLinkProps) {
-
     const {index, text, href} = props;
-    
+    const {close } = useStore();
+
     return (
         <li>
-            <a href={href} className="p-2 text-font-primary hover:text-green"><span className="text-green">{index}. </span>{text}</a>
+            <Link onClick={close} href={href} className="p-2 text-font-primary hover:text-green"><span className="text-green">{index}. </span>{text}</Link>
         </li>
     )
 }
