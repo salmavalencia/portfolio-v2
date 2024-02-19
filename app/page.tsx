@@ -2,6 +2,7 @@ import Header from "@/components/header";
 import { Button } from "@/components/ui/button";
 import Main from "@/components/main";
 import AboutMe from "@/components/about-me";
+import Experience from "@/components/experience";
 
 export default function Home() {
   return (
@@ -14,6 +15,9 @@ export default function Home() {
       </div>
       <div className="mb-48 flex flex-grow justify-center container">
         <AboutMe />
+      </div>
+      <div className="mb-48 flex flex-grow justify-center container">
+        <Experience />
       </div>
     </div>
   );
