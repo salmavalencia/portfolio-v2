@@ -5,10 +5,13 @@ export default function AboutMe() {
   return (
     <section className="flex items-center">
       <div className="max-w-[900px]">
-        <h2 className="text-3xl font-semibold text-font-primary mb-8">
-          <span className="text-lg font-mono text-green">01. </span>
-          About Me
-        </h2>
+        <div className="w-full md:w-3/5 flex items-center mb-8">
+          <h2 className="text-3xl font-semibold text-font-primary mr-4">
+            <span className="text-lg font-mono text-green">01. </span>
+            About Me
+          </h2>
+          <div className="flex-1 border border-t-1 border-font-tertiary"></div>
+        </div>
         <div className="flex flex-col md:flex-row gap-8">
           <div className="flex flex-col gap-4 text-md md:text-lg text-font-secondary md:w-3/5">
             <p>

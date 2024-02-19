@@ -29,6 +29,7 @@ const config: Config = {
       font: {
         "primary": "#ccd6f6",
         "secondary": "#8892b0",
+        "tertiary": "#2c344e",
       },
       green: "#64ffda",
       navy: {
