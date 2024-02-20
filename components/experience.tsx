@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react";
+import { FaArrowRight } from "react-icons/fa";
 
 export default function Experience() {
     const [ company, setCompany ] = useState(experienceData[0].company); 
@@ -8,8 +9,8 @@ export default function Experience() {
         setCompany(e.target.textContent);
     }
     return (
-        <section className="flex items-center">
-            <div className="max-w-[700px]">
+        <section className="flex items-center flex-grow md:flex-grow-0">
+            <div className="w-full md:max-w-[700px]">
                 <div className="flex items-center mb-8">
                     <h2 className="text-3xl font-semibold text-font-primary mr-4">
                         <span className="text-lg font-mono text-green">02. </span>
@@ -17,20 +18,28 @@ export default function Experience() {
                     </h2>
                     <div className="flex-1 border border-t-1 border-font-tertiary"></div>
                 </div>
-                <div className="flex gap-6">
-                    <div className="md:w-[150px]">
+                <div className="flex gap-6 flex-col md:flex-row">
+                    <div className="w-full md:w-[150px]">
                         <ul className="gap-0">
                             {experienceData.map((experience, index) => (
-                                <li key={index}><button onClick={handleClick} className={`m-0 text-sm border-l-4 font-mono ${experience.company === company && 'text-green'}`}>{experience.company}</button></li>    
+                                <li key={index}><button onClick={handleClick} className={`transition-all duration-500 p-2 m-0 text-sm border-l-4 border-font-tertiary font-mono text-font-secondary ${experience.company === company && 'text-green border-green'}`}>{experience.company}</button></li>    
                             ))}
                         </ul>
                     </div>
-                    <div className="md:w-[550px]">
+                    <div className="w-full md:w-[550px]">
                         {experienceData.map((experience) => (
-                            <div>
+                            <div>    
                                 {experience.company === company && (
                                     <div>
-                                        {experience.tasks[0]}
+                                        <div className="flex flex-col gap-1 mb-4">
+                                            <h3 className="text-font-primary text-xl font-semibold">{experience.position}</h3>
+                                            <p className="font-mono text-font-primary text-sm">{experience.date}</p>
+                                        </div>
+                                        <ul>
+                                            {experience.tasks.map((task, index) => (
+                                                <li key={index} className="flex gap-3 text-font-secondary mb-2"><span><FaArrowRight className="relative top-1" color="#64ffda" /></span> {task}</li>
+                                            ))}
+                                        </ul>
                                     </div>
                                 )}
                             </div>
