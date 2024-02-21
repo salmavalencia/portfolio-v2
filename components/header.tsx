@@ -4,32 +4,20 @@ import { Button } from "./ui/button";
 import { Squash as Hamburger } from "hamburger-react";
 import { useClickAway } from "react-use";
 import { useRef } from "react";
-import { create } from "zustand";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-
-const useStore = create<Store>((set) => ({
-  isOpen: false,
-  toggle: () => set((state: any) => ({ isOpen: !state.isOpen })),
-  close: () => set({ isOpen: false }),
-}));
-
-type Store = {
-  isOpen: boolean;
-  toggle: () => void;
-  close: () => void;
-};
+import { useStore } from "@/components/actions";
 
 export default function Header() {
   const { isOpen, toggle, close } = useStore();
-
+ 
   const ref = useRef(null);
   useClickAway(ref, close);
 
   return (
     <AnimatePresence>
-      <nav
-        className={`z-10 backdrop-blur-xl backdrop-brightness-250 fixed px-6 py-4 md:px-10 md:py-8 w-full ${isOpen ? "bg-navy-light" : "shadow-lg shadow-black"}`}
+      <header
+        className={`z-10 backdrop-blur-xl backdrop-brightness-250 sticky top-0 px-6 py-4 md:px-10 md:py-8 w-full ${isOpen ? "bg-navy-light" : "shadow-lg shadow-black"}`}
       >
         <div className="flex justify-between items-center">
           <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
@@ -68,7 +56,7 @@ export default function Header() {
             </div>
           </div>
         </div>
-      </nav>
+      </header>
     </AnimatePresence>
   );
 }
