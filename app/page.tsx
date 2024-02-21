@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <Header />
-        <div className={`-mt-20 ${isOpen && 'blur-sm'}`}>
+        <div className={`-mt-20 ${isOpen && 'transition-all duration-500 blur-sm'}`}>
         <div className="flex flex-col h-screen">
           <main className="flex flex-grow container">
             <Main />
