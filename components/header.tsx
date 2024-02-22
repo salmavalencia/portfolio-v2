@@ -17,7 +17,7 @@ export default function Header() {
   return (
     <AnimatePresence>
       <header
-        className={`z-10 backdrop-blur-xl backdrop-brightness-250 sticky top-0 px-6 py-4 md:px-10 md:py-8 w-full shadow-lg shadow-black ${isOpen && "bg-navy-light transition-all duration-[400ms] shadow-none"}`}
+        className={`z-10 backdrop-blur-xl backdrop-brightness-100 sticky top-0 px-6 py-4 md:px-10 md:py-8 w-full shadow-lg shadow-black ${isOpen && "bg-navy-light transition-all duration-[400ms] shadow-none"}`}
       >
         <div className="flex justify-between items-center">
           <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
@@ -82,7 +82,7 @@ function NavLink({ props, index }: NavLinkProps) {
       <Link
         onClick={close}
         href={href}
-        className="p-2 text-font-primary hover:text-green"
+        className="drop-shadow-lg shadow-black p-2 text-font-primary hover:text-green"
       >
         <span className="text-green">{index + 1}. </span>
         {text}
