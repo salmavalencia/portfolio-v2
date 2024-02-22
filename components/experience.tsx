@@ -34,8 +34,8 @@ export default function Experience() {
             </ul>
           </div>
           <div className="w-full md:w-[530px]">
-            {experienceData.map((experience) => (
-              <div>
+            {experienceData.map((experience, index) => (
+              <div key={index}>
                 {experience.company === company && (
                   <div>
                     <div className="flex flex-col gap-1 mb-4">

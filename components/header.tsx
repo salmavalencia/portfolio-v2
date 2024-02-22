@@ -10,7 +10,7 @@ import { useStore } from "@/components/actions";
 
 export default function Header() {
   const { isOpen, toggle, close } = useStore();
- 
+
   const ref = useRef(null);
   useClickAway(ref, close);
 
@@ -62,7 +62,7 @@ export default function Header() {
 }
 
 function NavBar() {
-  return data.map((item) => <NavLink props={item} />);
+  return data.map((item, index) => <NavLink key={index} props={item} />);
 }
 interface NavLinkProps {
   props: {

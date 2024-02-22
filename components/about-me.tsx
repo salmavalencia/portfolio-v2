@@ -56,10 +56,10 @@ function SkillTable() {
   return (
     <table className="border-separate border-spacing-y-3 font-mono text-sm md:text-md">
       <tbody>
-        {processedTableData.map((row) => (
-          <tr className="pb-4">
-            {row.map((item) => (
-              <td>
+        {processedTableData.map((row, index) => (
+          <tr key={index} className="pb-4">
+            {row.map((item, j) => (
+              <td key={j}>
                 <div className="flex gap-2 items-center">
                   <FaArrowRight color="#64ffda" /> {item}
                 </div>
