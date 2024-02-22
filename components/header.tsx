@@ -17,7 +17,7 @@ export default function Header() {
   return (
     <AnimatePresence>
       <header
-        className={`z-10 backdrop-blur-xl backdrop-brightness-250 sticky top-0 px-6 py-4 md:px-10 md:py-8 w-full ${isOpen ? "bg-navy-light" : "shadow-lg shadow-black"}`}
+        className={`z-10 backdrop-blur-xl backdrop-brightness-250 sticky top-0 px-6 py-4 md:px-10 md:py-8 w-full shadow-lg shadow-black ${isOpen && "bg-navy-light transition-all duration-[400ms] shadow-none"}`}
       >
         <div className="flex justify-between items-center">
           <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
@@ -62,17 +62,19 @@ export default function Header() {
 }
 
 function NavBar() {
-  return data.map((item, index) => <NavLink key={index} props={item} />);
+  return data.map((item, index) => (
+    <NavLink key={index} index={index} props={item} />
+  ));
 }
 interface NavLinkProps {
   props: {
-    index: string;
     text: string;
     href: string;
   };
+  index: number;
 }
-function NavLink({ props }: NavLinkProps) {
-  const { index, text, href } = props;
+function NavLink({ props, index }: NavLinkProps) {
+  const { text, href } = props;
   const { close } = useStore();
 
   return (
@@ -82,7 +84,7 @@ function NavLink({ props }: NavLinkProps) {
         href={href}
         className="p-2 text-font-primary hover:text-green"
       >
-        <span className="text-green">{index}. </span>
+        <span className="text-green">{index + 1}. </span>
         {text}
       </Link>
     </li>
@@ -91,22 +93,18 @@ function NavLink({ props }: NavLinkProps) {
 
 const data = [
   {
-    index: "01",
     text: "About",
     href: "#",
   },
   {
-    index: "02",
     text: "Experience",
     href: "#",
   },
   {
-    index: "03",
     text: "Work",
     href: "#",
   },
   {
-    index: "04",
     text: "Contact",
     href: "#",
   },
