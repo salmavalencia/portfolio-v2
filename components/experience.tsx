@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Experience() {
   const [company, setCompany] = useState(experienceData[0].company);
@@ -25,7 +26,7 @@ export default function Experience() {
                 <li key={index}>
                   <button
                     onClick={handleClick}
-                    className={`transition-all duration-500 p-2 m-0 text-sm border-l-4 border-font-tertiary font-mono text-left text-font-secondary ${experience.company === company && "text-green border-green"}`}
+                    className={`hover:bg-navy-light hover:text-green w-full transition-all duration-500 p-2 m-0 text-sm border-l-4 border-font-tertiary font-mono text-left text-font-secondary ${experience.company === company && "text-green border-green"}`}
                   >
                     {experience.company}
                   </button>
@@ -37,32 +38,38 @@ export default function Experience() {
             {experienceData.map((experience, index) => (
               <div key={index}>
                 {experience.company === company && (
-                  <div>
-                    <div className="flex flex-col gap-1 mb-4">
-                      <h3 className="text-font-primary text-xl font-semibold">
-                        {experience.position}
-                      </h3>
-                      <p className="font-mono text-font-primary text-sm">
-                        {experience.date}
-                      </p>
-                    </div>
-                    <ul>
-                      {experience.tasks.map((task, index) => (
-                        <li
-                          key={index}
-                          className="flex gap-3 text-font-secondary mb-2"
-                        >
-                          <span>
-                            <FaArrowRight
-                              className="relative top-1"
-                              color="#64ffda"
-                            />
-                          </span>{" "}
-                          {task}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <AnimatePresence>
+                    <motion.div
+                      initial={{ opacity: 0, scale: 1 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      <div className="flex flex-col gap-1 mb-4">
+                        <h3 className="text-font-primary text-xl font-semibold">
+                          {experience.position}
+                        </h3>
+                        <p className="font-mono text-font-primary text-sm">
+                          {experience.date}
+                        </p>
+                      </div>
+                      <ul>
+                        {experience.tasks.map((task, index) => (
+                          <li
+                            key={index}
+                            className="flex gap-3 text-font-secondary mb-2"
+                          >
+                            <span>
+                              <FaArrowRight
+                                className="relative top-1"
+                                color="#64ffda"
+                              />
+                            </span>{" "}
+                            {task}
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  </AnimatePresence>
                 )}
               </div>
             ))}
