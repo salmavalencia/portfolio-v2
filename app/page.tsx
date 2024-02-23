@@ -1,17 +1,20 @@
-'use client'
+"use client";
 
 import Header from "@/components/header";
 import Main from "@/components/main";
 import AboutMe from "@/components/about-me";
 import Experience from "@/components/experience";
 import { useStore } from "@/components/actions";
+import Skills from "@/components/skills";
 
 export default function Home() {
   const { isOpen } = useStore();
   return (
     <>
       <Header />
-        <div className={`-mt-20 ${isOpen && 'transition-all duration-500 blur-sm'}`}>
+      <div
+        className={`-mt-20 ${isOpen && "transition-all duration-500 blur-sm"}`}
+      >
         <div className="flex flex-col h-screen">
           <main className="flex flex-grow container">
             <Main />
@@ -22,6 +25,9 @@ export default function Home() {
         </div>
         <div className="mb-48 flex flex-grow justify-center container">
           <Experience />
+        </div>
+        <div>
+          <Skills />
         </div>
       </div>
       <footer></footer>
