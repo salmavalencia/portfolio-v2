@@ -1,22 +1,22 @@
-import type { Config } from 'tailwindcss'
-const { fontFamily } = require('tailwindcss/defaultTheme')
+import type { Config } from "tailwindcss";
+const { fontFamily } = require("tailwindcss/defaultTheme");
 
 const config: Config = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       fontFamily: {
-        mono: ['var(--font-roboto-mono)', ...fontFamily.mono],
-      }
+        mono: ["var(--font-roboto-mono)", ...fontFamily.mono],
+      },
     },
     container: {
       center: true,
@@ -27,17 +27,17 @@ const config: Config = {
     },
     colors: {
       font: {
-        "primary": "#ccd6f6",
-        "secondary": "#8892b0",
-        "tertiary": "#2c344e",
+        primary: "#ccd6f6",
+        secondary: "#8892b0",
+        tertiary: "#2c344e",
       },
       green: "#64ffda",
       navy: {
         light: "#112240",
-        dark: "#0a192f"
-      }
-    }
+        dark: "#0a192f",
+      },
+    },
   },
-  plugins: [],
-}
-export default config
+  plugins: [require("tailwindcss-animated")],
+};
+export default config;
