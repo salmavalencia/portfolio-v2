@@ -26,7 +26,7 @@ export default function Home() {
         <div className="mb-48 flex flex-grow justify-center container">
           <Experience />
         </div>
-        <div>
+        <div className="container">
           <Skills />
         </div>
       </div>
