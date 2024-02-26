@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Main() {
   return (
     <section className="flex items-center">
-      <div className="animate-fade-right flex flex-col gap-4">
+      <div className="animate-fade-up flex flex-col gap-4">
         <p className="text-base text-green font-mono">Hi, my name is</p>
         <h1 className="text-5xl md:text-7xl text-font-primary font-bold">
           Salma Valencia.
