@@ -23,7 +23,7 @@ export default function Skills() {
       >
         {skillsData.map((skill, index) => (
           <Card
-            className={`p-7 py-9 flex flex-col justify-between ${isVisibleTable && "animate-fade-up animate-duration-1000"}`}
+            className={`opacity-0 p-7 py-9 flex flex-col justify-between ${isVisibleTable && "animate-fade-up animate-duration-1000"}`}
             key={index}
           >
             <div>
