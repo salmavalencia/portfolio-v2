@@ -6,6 +6,7 @@ import AboutMe from "@/components/about-me";
 import Experience from "@/components/experience";
 import { useStore } from "@/components/actions";
 import Skills from "@/components/skills";
+import Contact from "@/components/contact";
 
 export default function Home() {
   const { isOpen } = useStore();
@@ -28,6 +29,9 @@ export default function Home() {
         </div>
         <div className="container">
           <Skills />
+        </div>
+        <div className="container">
+          <Contact />
         </div>
       </div>
       <footer></footer>
