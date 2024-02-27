@@ -25,7 +25,21 @@ export default function Contact() {
     handleSubmit,
     formState: { errors },
   } = useForm<formSchemaType>({ resolver: zodResolver(FormSchema) });
-  const onSubmit: SubmitHandler<formSchemaType> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<formSchemaType> = async (data) => {
+    try {
+      const res = await fetch("api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data,
+        }),
+      });
+    } catch (error) {
+      console.log("Error during action: ", error);
+    }
+  };
 
   return (
     <section>
