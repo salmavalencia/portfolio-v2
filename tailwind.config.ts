@@ -33,8 +33,15 @@ const config: Config = {
       },
       green: "#64ffda",
       navy: {
+        lighter: "#1a417a",
         light: "#112240",
         dark: "#0a192f",
+      },
+      red: {
+        400: "#fb7185",
+      },
+      gray: {
+        700: "#374151",
       },
     },
   },
