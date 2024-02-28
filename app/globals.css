@@ -19,5 +19,11 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: #0a192f;
-  --font-roboto-mono: 'Roboto Mono', monospace;
+  --font-roboto-mono: "Roboto Mono", monospace;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 50px rgb(10, 25, 47) inset;
+  -webkit-text-fill-color: #64ffda;
+  -webkit-border-image: red;
+  caret-color: #64ffda;
 }

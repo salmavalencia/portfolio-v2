@@ -6,14 +6,12 @@ import { Button } from "./ui/button";
 type FormData = {
   fullName: string;
   email: string;
-  phone?: string;
   message: string;
 };
 
 const FormSchema = z.object({
   fullName: z.string().min(1).max(100),
   email: z.string().email(),
-  phone: z.string().min(7).max(15),
   message: z.string().min(10).max(500),
 });
 
@@ -42,25 +40,66 @@ export default function Contact() {
   };
 
   return (
-    <section>
-      <form onSubmit={handleSubmit(onSubmit)} className="form flex flex-col">
-        <label>Full Name</label>
-        <input placeholder="John Doe" {...register("fullName")} />
-        {errors.fullName && <span>{errors.fullName.message}</span>}
-        <label>E-mail</label>
-        <input placeholder="someone@gmail.com" {...register("email")} />
-        {errors.email && <span>{errors.email.message}</span>}
-        <label>Phone Number</label>
-        <input placeholder="+1 (800) 000-8080" {...register("phone")} />
-        {errors.phone && <span>{errors.phone.message}</span>}
-        <label>Your message</label>
-        <textarea
-          placeholder="Write your message here..."
-          {...register("message")}
-        />
-        {errors.message && <span>{errors.message.message}</span>}
-        <Button type="submit">Say Hello</Button>
-      </form>
+    <section className="flex flex-col text-font-primary h-screen">
+      <div className="my-auto flex flex-col items-center">
+        <p className="text-lg text-green font-mono mb-4">04. What's Next?</p>
+        <h2 className="text-5xl font-bold mb-6">Get In Touch</h2>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="form w-full duration-700"
+        >
+          <div className="space-y-4">
+            <div className="flex flex-col md:flex-row space-y-4 md:space-x-4 md:space-y-0">
+              <div className="flex flex-col transition-[72px] duration-700 w-full md:w-1/2">
+                <label className="mb-2">Full Name</label>
+                <input
+                  placeholder="John Doe"
+                  {...register("fullName")}
+                  className="bg-gray-50 border border-navy-lighter text-green text-sm rounded-lg outline-none block w-full p-2.5 bg-navy-dark placeholder-font-secondary"
+                  type="text"
+                />
+                {errors.fullName && (
+                  <span className="animate-fade text-red-400">
+                    {errors.fullName.message}
+                  </span>
+                )}
+              </div>
+              <div className="flex flex-col transition-[72px] duration-700 w-full md:w-1/2">
+                <label className="mb-2">E-mail</label>
+                <input
+                  placeholder="someone@gmail.com"
+                  {...register("email")}
+                  className="bg-gray-50 border border-navy-lighter text-green text-sm rounded-lg outline-none block w-full p-2.5 bg-navy-dark focus:bg-navy-dark focus:border-transparent placeholder-font-secondary"
+                  type="text"
+                />
+                {errors.email && (
+                  <span className="animate-fade text-red-400">
+                    {errors.email.message}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <label className="mb-2">Your message</label>
+              <textarea
+                placeholder="Write your message here..."
+                {...register("message")}
+                className="block p-2.5 w-full text-sm text-green rounded-lg border border-navy-lighter outline-none h-32 bg-navy-dark placeholder-font-secondary"
+              />
+              {errors.message && (
+                <span className="animate-fade text-red-400">
+                  {errors.message.message}
+                </span>
+              )}
+            </div>
+          </div>
+          <div className="flex flex-col items-center mt-6">
+            <Button type="submit" className="px-5 py-4">
+              Say Hello
+            </Button>
+          </div>
+        </form>
+      </div>
     </section>
   );
 }
