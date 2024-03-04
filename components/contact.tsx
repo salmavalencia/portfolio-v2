@@ -2,6 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "./ui/button";
+import { useState } from "react";
 
 type FormData = {
   fullName: string;
@@ -18,6 +19,7 @@ const FormSchema = z.object({
 type formSchemaType = z.infer<typeof FormSchema>;
 
 export default function Contact() {
+  const [status, setStatus] = useState(0);
   const {
     register,
     handleSubmit,
@@ -34,8 +36,14 @@ export default function Contact() {
           data,
         }),
       });
+      if (res.ok) {
+        setStatus(res.status);
+        return;
+      }
+      setStatus(res.status);
     } catch (error) {
       console.log("Error during action: ", error);
+      setStatus(500);
     }
   };
 
@@ -93,10 +101,22 @@ export default function Contact() {
               )}
             </div>
           </div>
-          <div className="flex flex-col items-center mt-6">
+          <div className="flex flex-col items-center mt-6 gap-4">
             <Button type="submit" className="px-5 py-4">
               Say Hello
             </Button>
+            {!status ||
+              (status !== 201 && (
+                <span className="animate-fade text-red-400 text-center">
+                  I'm sorry, there was an error in your request. Refresh or try
+                  again later 😔
+                </span>
+              ))}
+            {status === 201 && (
+              <span className="animate-fade text-font-primary text-center">
+                E-mail sent 👍
+              </span>
+            )}
           </div>
         </form>
       </div>
