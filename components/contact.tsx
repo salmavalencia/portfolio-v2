@@ -24,6 +24,7 @@ export default function Contact() {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm<formSchemaType>({ resolver: zodResolver(FormSchema) });
   const onSubmit: SubmitHandler<formSchemaType> = async (data) => {
     try {
@@ -38,6 +39,7 @@ export default function Contact() {
       });
       if (res.ok) {
         setStatus(res.status);
+        reset();
         return;
       }
       setStatus(res.status);
