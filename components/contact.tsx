@@ -125,7 +125,7 @@ export default function Contact() {
               )
             }
             {!status ||
-              (status !== 201 && (
+              (status !== 201 && status !== 429 && (
                 <span className="animate-fade text-red-400 text-center">
                   I'm sorry, there was an error in your request. Refresh or try
                   again later 😔
@@ -134,6 +134,11 @@ export default function Contact() {
             {status === 201 && (
               <span className="animate-fade text-font-primary text-center">
                 E-mail sent 👍
+              </span>
+            )}
+            {status === 429 && (
+              <span className="animate-fade text-red-400 text-center">
+                Too many requests. Try again later
               </span>
             )}
           </div>
