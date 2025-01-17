@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useStore } from "@/components/actions";
 
-export default function Header() {
+export default function Header({headerData}: {headerData: HeaderProps}) {
   const { isOpen, toggle, close } = useStore();
 
   const ref = useRef(null);
@@ -30,7 +30,7 @@ export default function Header() {
           <div className="font-mono">
             <div className="hidden md:block">
               <ul className="flex text-sm gap-2.5 lg:gap-6 items-center">
-                <NavBar />
+                {headerData && <NavBar navbarData={headerData.navbar}/>}
                 <Button className="text-sm">Resume</Button>
               </ul>
             </div>
@@ -48,7 +48,7 @@ export default function Header() {
                   transition={{ duration: 0.4 }}
                 >
                   <ul className="text-center fixed left-0 shadow-4xl right-0 top-[5rem] py-8 flex flex-col gap-6 bg-navy-light">
-                    <NavBar />
+                    {headerData && <NavBar navbarData={headerData.navbar}/>}
                     <Button className="text-sm mt-6 mx-auto">Resume</Button>
                   </ul>
                 </motion.div>
@@ -61,10 +61,12 @@ export default function Header() {
   );
 }
 
-function NavBar() {
-  return data.map((item, index) => (
-    <NavLink key={index} index={index} props={item} />
-  ));
+function NavBar({navbarData}: {navbarData: NavbarProps[]}) {
+  return (
+    navbarData.map((item, index) => (
+      <NavLink key={index} index={index} props={{ text: item.title, href: item.link }} isExternal={item.isExternal}/>
+    ))
+  )    
 }
 interface NavLinkProps {
   props: {
@@ -72,8 +74,9 @@ interface NavLinkProps {
     href: string;
   };
   index: number;
+  isExternal: boolean
 }
-function NavLink({ props, index }: NavLinkProps) {
+function NavLink({ props, index, isExternal }: NavLinkProps) {
   const { text, href } = props;
   const { close } = useStore();
 
@@ -83,29 +86,23 @@ function NavLink({ props, index }: NavLinkProps) {
         onClick={close}
         href={href}
         className="drop-shadow-lg shadow-black p-2 text-font-primary hover:text-green"
+        target={isExternal ? "_blank" : ""}
       >
         <span className="text-green">{index + 1}. </span>
-        {text}
+        {text && text}
       </Link>
     </li>
   );
 }
 
-const data = [
-  {
-    text: "About",
-    href: "#",
-  },
-  {
-    text: "Experience",
-    href: "#",
-  },
-  {
-    text: "Work",
-    href: "#",
-  },
-  {
-    text: "Contact",
-    href: "#",
-  },
-];
+interface HeaderProps {
+  navbar: NavbarProps[]
+  button: NavbarProps
+}
+
+interface NavbarProps {
+  id: number
+  isExternal: boolean;
+  link: string;
+  title: string
+}

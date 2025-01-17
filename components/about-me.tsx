@@ -1,42 +1,30 @@
 import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
 
-export default function AboutMe() {
+export default function AboutMe({aboutData} : {aboutData: AboutProps}) {
   return (
     <section className="flex items-center">
       <div className="max-w-[900px]">
         <div className="w-full md:w-3/5 flex items-center mb-8">
           <h2 className="text-3xl font-semibold text-font-primary mr-4">
             <span className="text-lg font-mono text-green">01. </span>
-            About Me
+            {aboutData.title}
           </h2>
           <div className="flex-1 border border-t-1 border-font-tertiary"></div>
         </div>
         <div className="flex flex-col md:flex-row gap-8">
           <div className="flex flex-col gap-4 text-md md:text-lg text-font-secondary md:w-3/5">
             <p>
-              Hello! My name is Salma and I enjoy creating things that live on
-              the internet. My interest in web development started back in 2012
-              when I decided to try editing custom Tumblr themes — turns out
-              hacking together a custom reblog button taught me a lot about HTML
-              & CSS!
+              {aboutData.description}
             </p>
-            <p>
-              Fast-forward to today, and I’ve had the privilege of working at an
-              advertising agency, a start-up, a huge corporation, and a
-              student-led design studio. My main focus these days is building
-              accessible, inclusive products and digital experiences at
-              Upstatement for a variety of clients.
-            </p>
-            <p>Here are a few technologies I’ve been working with recently:</p>
-            <SkillTable />
+            <SkillTable skillData={aboutData.skills_teches.data}/>
           </div>
           <div className="md:w-2/5 mx-8 flex justify-center h-fit">
             <div className="w-fit border rounded border-green hover:bg-navy-dark transition-all duration-500">
               <div className="rounded hover:-translate-y-1 hover:-translate-x-1 transition-all duration-400 bg-green w-fit relative -left-2 -top-2">
                 <Image
-                  src="/images/profile.jpg"
-                  alt="profile photo"
+                  src={process.env.NEXT_PUBLIC_STRAPI_API_URL + aboutData.image.data.attributes.url}
+                  alt={aboutData.image.data.attributes.alternativeText ? aboutData.image.data.attributes.alternativeText : ""}
                   width="270"
                   height="270"
                   className="opacity-75 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-500 rounded"
@@ -50,13 +38,37 @@ export default function AboutMe() {
   );
 }
 
-function SkillTable() {
-  let processedTableData = processArray(tableData);
+interface AboutProps {
+  title: string
+  description: string
+  image: {
+    data: {
+      id: number;
+      attributes: {
+        name: string;
+        alternativeText: string | null;
+        url: string;
+      };
+    };
+  };
+  skills_teches: {
+    data: SkillTech[];
+  };
+}
+
+interface SkillTech {
+  id: number;
+  attributes: {name: string}
+}
+function SkillTable({skillData}: {skillData: {attributes: {name: string}}[]}) {
+  const skillArr = skillData.map(item => item.attributes.name)
+
+  let processedTableData = processArray(skillArr)
 
   return (
     <table className="border-separate border-spacing-y-3 font-mono text-sm md:text-md">
       <tbody>
-        {processedTableData.map((row, index) => (
+        {skillData && processedTableData.map((row, index) => (
           <tr key={index} className="pb-4">
             {row.map((item, j) => (
               <td key={j}>
@@ -72,15 +84,6 @@ function SkillTable() {
   );
 }
 
-const tableData = [
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "Eleventy",
-  "Node.js",
-  "WordPress",
-];
-
 function processArray(data: Array<string>) {
   //creates an array with arrays consisting of two strings
   let newArr: Array<Array<string>> = [];
@@ -88,10 +91,12 @@ function processArray(data: Array<string>) {
 
   data.forEach((item, index) => {
     tempArr.push(item);
-
+    
     if ((index + 1) % 2 === 0) {
       newArr.push(tempArr);
-      tempArr = [];
+      tempArr = []
+    } else if (index + 1 == data.length) {
+        newArr.push(tempArr)
     }
   });
 

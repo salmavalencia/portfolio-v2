@@ -39,8 +39,7 @@ export default function Home() {
       const responseData = await fetchAPI(path, urlParamsObject, options);
       
       if (start === 0) {
-        setData(responseData.data);
-        console.log(responseData.data)
+        setData(responseData.data[0].attributes.blocks);
       } else {
         setData((prevData: any[] ) => [...prevData, ...responseData.data]);
       }
@@ -58,26 +57,26 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      <Header headerData={data[5]}/>
       <div
         className={`-mt-20 ${isOpen && "transition-all duration-500 blur-sm"}`}
       >
         <div className="flex flex-col h-screen">
           <main className="flex flex-grow container">
-            <Main />
+            {data[0] && <Main mainData={data[0]}/>}
           </main>
         </div>
         <div className="mb-48 flex flex-grow justify-center container">
-          <AboutMe />
+          {data[1] && <AboutMe aboutData={data[1]}/>}
         </div>
         <div className="mb-48 flex flex-grow justify-center container">
-          <Experience />
+          {data[2] && <Experience experienceData={data[2]}/>}
         </div>
         <div className="container">
-          <Skills />
+          {data[3] && <Skills skillData={data[3]}/>}
         </div>
         <div className="container">
-          <Contact />
+          {data[4] && <Contact contactData={data[4]}/>}
         </div>
       </div>
       <footer></footer>

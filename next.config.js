@@ -15,7 +15,13 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: 'images.pexels.com',
-            }
+            },
+            {
+                protocol: "https",
+                hostname: "portfolio-data-production.up.railway.app",
+                port: "",
+                pathname: "/uploads/**",
+            },
         ],
     },
 }

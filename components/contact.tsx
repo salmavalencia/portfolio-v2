@@ -18,7 +18,7 @@ const FormSchema = z.object({
 
 type formSchemaType = z.infer<typeof FormSchema>;
 
-export default function Contact() {
+export default function Contact({contactData} : {contactData: ContactProps}) {
   const [status, setStatus] = useState(0);
   const [ isLoading, setIsLoading] = useState(false);
   
@@ -57,8 +57,8 @@ export default function Contact() {
   return (
     <section className="flex flex-col text-font-primary h-screen">
       <div className="my-auto flex flex-col items-center">
-        <p className="text-lg text-green font-mono mb-4">04. What's Next?</p>
-        <h2 className="text-5xl font-bold mb-6">Get In Touch</h2>
+        <p className="text-lg text-green font-mono mb-4">04. {contactData.subtitle}</p>
+        <h2 className="text-5xl font-bold mb-6">{contactData.title}</h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="form w-full duration-700"
@@ -66,9 +66,9 @@ export default function Contact() {
           <div className="space-y-4">
             <div className="flex flex-col md:flex-row space-y-4 md:space-x-4 md:space-y-0">
               <div className="flex flex-col transition-[72px] duration-700 w-full md:w-1/2">
-                <label className="mb-2">Full Name</label>
+                <label className="mb-2">{contactData.form.nameInput.label}</label>
                 <input
-                  placeholder="John Doe"
+                  placeholder={contactData.form.nameInput.placeholder}
                   {...register("fullName")}
                   className="bg-gray-50 border border-navy-lighter text-green text-sm rounded-lg outline-none block w-full p-2.5 bg-navy-dark placeholder-font-secondary"
                   type="text"
@@ -80,9 +80,9 @@ export default function Contact() {
                 )}
               </div>
               <div className="flex flex-col transition-[72px] duration-700 w-full md:w-1/2">
-                <label className="mb-2">E-mail</label>
+                <label className="mb-2">{contactData.form.emailInput.label}</label>
                 <input
-                  placeholder="someone@gmail.com"
+                  placeholder={contactData.form.emailInput.placeholder}
                   {...register("email")}
                   className="bg-gray-50 border border-navy-lighter text-green text-sm rounded-lg outline-none block w-full p-2.5 bg-navy-dark focus:bg-navy-dark focus:border-transparent placeholder-font-secondary"
                   type="text"
@@ -95,9 +95,9 @@ export default function Contact() {
               </div>
             </div>
             <div className="flex flex-col">
-              <label className="mb-2">Your message</label>
+              <label className="mb-2">{contactData.form.messageInput.label}</label>
               <textarea
-                placeholder="Write your message here..."
+                placeholder={contactData.form.messageInput.placeholder}
                 {...register("message")}
                 className="block p-2.5 w-full text-sm text-green rounded-lg border border-navy-lighter outline-none h-32 bg-navy-dark placeholder-font-secondary"
               />
@@ -120,20 +120,19 @@ export default function Contact() {
             </div>
               ) : (
                 <Button type="submit" className="px-5 py-4">
-              <span>Say Hello</span>
-              </Button>
+                  <span>{contactData.button.title}</span>
+                </Button> 
               )
             }
             {!status ||
               (status !== 201 && status !== 429 && (
                 <span className="animate-fade text-red-400 text-center">
-                  I'm sorry, there was an error in your request. Refresh or try
-                  again later 😔
+                  {contactData.errorMessage}
                 </span>
               ))}
             {status === 201 && (
               <span className="animate-fade text-font-primary text-center">
-                E-mail sent 👍
+                {contactData.successMessage}
               </span>
             )}
             {status === 429 && (
@@ -146,4 +145,30 @@ export default function Contact() {
       </div>
     </section>
   );
+}
+
+interface ContactProps {
+  title: string
+  subtitle: string
+  errorMessage: string
+  successMessage: string
+  button: {
+    isExternal: boolean | null
+    link: string | null
+    title: string
+  }
+  form: {
+    emailInput: {
+      label: string
+      placeholder: string
+    }
+    messageInput: {
+      label: string
+      placeholder: string
+    },
+    nameInput: {
+      label: string
+      placeholder: string
+    }
+  }
 }

@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useIsVisible } from "./hooks/visible";
 import { FaArrowRight } from "react-icons/fa";
 
-export default function Skills() {
+export default function Skills({skillData}: {skillData: SkillProps}) {
   const refTable = useRef<HTMLDivElement>(null);
   const isVisibleTable = useIsVisible(refTable);
 
@@ -12,17 +12,19 @@ export default function Skills() {
     <section className="text-center">
       <h2 className="text-3xl font-semibold text-font-primary mb-3">
         <span className="text-lg font-mono text-green">03. </span>
-        My Skills
+        {skillData.title}
       </h2>
       <Link href="#">
-        <p className="text-green font-mono text-md mb-12">My projects</p>
+        <p className="text-green font-mono text-md mb-12">{skillData.subtitle}</p>
       </Link>
       <div
         ref={refTable}
         className="text-left grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
       >
-        {skillsData.map((skill, index) => (
-          <Card
+        {skillData.card.map((skill, index) => {
+          const Icon = skill.icon;
+          return (
+            <Card
             className={`opacity-0 p-7 py-9 flex flex-col justify-between ${isVisibleTable && "animate-fade-up animate-duration-1000"}`}
             key={index}
           >
@@ -38,79 +40,36 @@ export default function Skills() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              {skill.technologies &&
-                skill.technologies.map((tech, j) => (
+              {skill.skills_teches &&
+                skill.skills_teches.data.map((element, j) => (
                   <p key={j} className="text-sm font-mono text-font-secondary">
-                    {tech}
+                    {element.attributes.name}
                   </p>
                 ))}
             </div>
           </Card>
-        ))}
+          )
+        })}
       </div>
     </section>
   );
 }
 
-const skillsData = [
-  {
-    icon: "faCircleCheck",
-    title: "Integrating Algolia Search with WordPress Multisite",
-    description:
-      "Building a custom multisite compatible WordPress plugin to build global search with Algolia",
-    technologies: ["HTML", "CSS", "JavaScript"],
-  },
-  {
-    icon: "faCircleCheck",
-    title: "Integrating Algolia Search with WordPress Multisite",
-    description: "Building a custom multisite",
-    technologies: ["HTML", "CSS", "JavaScript", "HTML", "CSS", "JavaScript"],
-  },
-  {
-    icon: "faCircleCheck",
-    title: "Integrating Algolia Search with WordPress Multisite",
-    description:
-      "Building a custom multisite compatible WordPress plugin to build global search with Algolia",
-    technologies: ["HTML", "CSS", "JavaScript"],
-  },
-  {
-    icon: "faCircleCheck",
-    title: "Integrating Algolia Search with WordPress Multisite",
-    description:
-      "Building a custom multisite compatible WordPress plugin to build global search with Algolia",
-  },
-  {
-    icon: "faCircleCheck",
-    title: "Integrating Algolia Search with WordPress Multisite",
-    description:
-      "Building a custom multisite compatible WordPress plugin to build global search with Algolia",
-    technologies: ["HTML", "CSS", "JavaScript"],
-  },
-  {
-    icon: "faCircleCheck",
-    title: "Integrating Algolia Search with WordPress Multisite",
-    description:
-      "Building a custom multisite compatible WordPress plugin to build global search with Algolia",
-    technologies: ["HTML", "CSS", "JavaScript"],
-  },
-  {
-    icon: "faCircleCheck",
-    title: "Integrating Algolia Search with WordPress Multisite",
-    description:
-      "Building a custom multisite compatible WordPress plugin to build global search with Algolia",
-    technologies: ["HTML", "CSS", "JavaScript"],
-  },
-  {
-    icon: "faCircleCheck",
-    title: "Integrating Algolia Search with WordPress Multisite",
-    description:
-      "Building a custom multisite compatible WordPress plugin to build global search with Algolia",
-    technologies: ["HTML", "CSS", "JavaScript"],
-  },
-  {
-    icon: "faCircleCheck",
-    title: "Integrating Algolia Search with WordPress Multisite",
-    description: "Building a custom multisite compatible WordPress",
-    technologies: ["HTML", "CSS", "JavaScript"],
-  },
-];
+interface SkillProps {
+  title: string,
+  subtitle: string,
+  card: CardProps[]
+}
+
+interface CardProps {
+  icon: string,
+  title: string,
+  description: string,
+  skills_teches: {
+    data: {
+      attributes: {
+        name: string
+      }
+    }[]
+  }
+}
