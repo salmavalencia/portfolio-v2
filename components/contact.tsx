@@ -137,7 +137,7 @@ export default function Contact({contactData} : {contactData: ContactProps}) {
             )}
             {status === 429 && (
               <span className="animate-fade text-red-400 text-center">
-                Too many requests. Try again later
+                {contactData.tooManyRequests}
               </span>
             )}
           </div>
@@ -152,6 +152,7 @@ interface ContactProps {
   subtitle: string
   errorMessage: string
   successMessage: string
+  tooManyRequests: string
   button: {
     isExternal: boolean | null
     link: string | null
