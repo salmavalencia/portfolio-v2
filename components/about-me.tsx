@@ -23,7 +23,7 @@ export default function AboutMe({aboutData} : {aboutData: AboutProps}) {
             <div className="w-fit border rounded border-green hover:bg-navy-dark transition-all duration-500">
               <div className="rounded hover:-translate-y-1 hover:-translate-x-1 transition-all duration-400 bg-green w-fit relative -left-2 -top-2">
                 <Image
-                  src={process.env.NEXT_PUBLIC_STRAPI_API_URL + aboutData.image.data.attributes.url}
+                  src={aboutData.image.data.attributes.url}
                   alt={aboutData.image.data.attributes.alternativeText ? aboutData.image.data.attributes.alternativeText : ""}
                   width="270"
                   height="270"

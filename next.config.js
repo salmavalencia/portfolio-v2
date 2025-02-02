@@ -15,9 +15,7 @@ const nextConfig = {
             },
             {
                 protocol: "https",
-                hostname: "portfolio-data-production.up.railway.app",
-                port: "",
-                pathname: "/uploads/**",
+                hostname: "res.cloudinary.com",
             },
         ],
     },
