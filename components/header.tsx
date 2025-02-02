@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "./ui/button";
 import { Squash as Hamburger } from "hamburger-react";
 import { useClickAway } from "react-use";
 import { useRef } from "react";
@@ -31,7 +30,7 @@ export default function Header({headerData}: {headerData: HeaderProps}) {
             <div className="hidden md:block">
               <ul className="flex text-sm gap-2.5 lg:gap-6 items-center">
                 {headerData && <NavBar navbarData={headerData.navbar}/>}
-                <Button className="text-sm">Resume</Button>
+                <Link href="#social" onClick={close} className="transition-all duration-350 hover:shadow-[3px_3px_0px_0px] hover:-translate-y-1 hover:-translate-x-1 active:translate-y-0 active:translate-x-0 active:shadow-none hover:ring-green border border-green rounded px-4 py-2 text-green font-mono text-sm">Social</Link>
               </ul>
             </div>
             <div ref={ref} className="md:hidden">
@@ -49,7 +48,7 @@ export default function Header({headerData}: {headerData: HeaderProps}) {
                 >
                   <ul className="text-center fixed left-0 shadow-4xl right-0 top-[5rem] py-8 flex flex-col gap-6 bg-navy-light">
                     {headerData && <NavBar navbarData={headerData.navbar}/>}
-                    <Button className="text-sm mt-6 mx-auto">Resume</Button>
+                    <Link href="#social" onClick={close} className="transition-all duration-350 hover:shadow-[3px_3px_0px_0px] hover:-translate-y-1 hover:-translate-x-1 active:translate-y-0 active:translate-x-0 active:shadow-none hover:ring-green border border-green rounded px-4 py-2 text-green font-mono text-sm mt-6 mx-auto">Social</Link>
                   </ul>
                 </motion.div>
               )}
