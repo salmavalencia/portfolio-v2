@@ -4,12 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "./ui/button";
 import { useState } from "react";
 
-type FormData = {
-  fullName: string;
-  email: string;
-  message: string;
-};
-
 const FormSchema = z.object({
   fullName: z.string().min(1).max(100),
   email: z.string().email(),
@@ -55,7 +49,7 @@ export default function Contact({contactData} : {contactData: ContactProps}) {
   };
 
   return (
-    <section className="flex flex-col text-font-primary h-screen">
+    <section className="flex flex-col text-font-primary h-screen scroll-mt-8" id="contact">
       <div className="my-auto flex flex-col items-center">
         <p className="text-lg text-green font-mono mb-4">04. {contactData.subtitle}</p>
         <h2 className="text-5xl font-bold mb-6">{contactData.title}</h2>

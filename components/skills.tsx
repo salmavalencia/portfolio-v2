@@ -1,8 +1,6 @@
 import Card from "@/components/ui/card";
-import Link from "next/link";
-import { Suspense, useRef } from "react";
+import { useRef } from "react";
 import { useIsVisible } from "./hooks/visible";
-import React, { lazy } from "react";
 import DynamicIcon from "@/app/[lang]/utils/dynamic-icon";
 
 export default function Skills({skillData}: {skillData: SkillProps}) {
@@ -10,14 +8,12 @@ export default function Skills({skillData}: {skillData: SkillProps}) {
   const isVisibleTable = useIsVisible(refTable);
 
   return (
-    <section className="text-center">
+    <section className="text-center scroll-mt-28" id="skills">
       <h2 className="text-3xl font-semibold text-font-primary mb-3">
         <span className="text-lg font-mono text-green">03. </span>
         {skillData.title}
       </h2>
-      <Link href="#">
-        <p className="text-green font-mono text-md mb-12">{skillData.subtitle}</p>
-      </Link>
+      <p className="text-green font-mono text-md mb-12">{skillData.subtitle}</p>
       <div
         ref={refTable}
         className="text-left grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"

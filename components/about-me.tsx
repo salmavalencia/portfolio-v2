@@ -3,7 +3,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 export default function AboutMe({aboutData} : {aboutData: AboutProps}) {
   return (
-    <section className="flex items-center">
+    <section className="flex items-center scroll-mt-28" id="about">
       <div className="max-w-[900px]">
         <div className="w-full md:w-3/5 flex items-center mb-8">
           <h2 className="text-3xl font-semibold text-font-primary mr-4">

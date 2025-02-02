@@ -10,7 +10,7 @@ export default function Experience({experienceData}: {experienceData: Experience
     setCompany(e.target.textContent);
   };
   return (
-    <section className="flex items-center flex-grow md:flex-grow-0">
+    <section className="flex items-center flex-grow md:flex-grow-0 scroll-mt-28" id="experience">
       <div className="w-full">
         <div className="flex items-center mb-8">
           <h2 className="text-3xl font-semibold text-font-primary mr-4">

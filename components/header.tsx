@@ -17,7 +17,7 @@ export default function Header({headerData}: {headerData: HeaderProps}) {
   return (
     <AnimatePresence>
       <header
-        className={`z-10 backdrop-blur-xl backdrop-brightness-100 sticky top-0 px-6 py-4 md:px-10 md:py-6 w-full shadow-lg shadow-black ${isOpen && "bg-navy-light transition-all duration-[400ms] shadow-none"}`}
+        className={`z-10 backdrop-blur-xl backdrop-brightness-100 sticky top-0 px-6 py-4 md:px-10 md:py-6 w-full shadow-md shadow-black ${isOpen && "bg-navy-light transition-all duration-[400ms] shadow-none"}`}
       >
         <div className="flex justify-between items-center">
           <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
