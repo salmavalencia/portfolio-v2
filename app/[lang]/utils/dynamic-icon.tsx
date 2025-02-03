@@ -2,7 +2,6 @@ import { lazy, Suspense, useMemo} from "react";
 import type { IconType } from "react-icons";
 
 const DynamicIcon = ({iconName, size, color}: IconProps) => {
-    console.log("here")
     const IconComponent = useMemo(() => {
         return lazy(async () => {
             const module = await import("react-icons/fa");

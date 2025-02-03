@@ -2,9 +2,6 @@ import { useEffect } from "react"
 import DynamicIcon from "@/app/[lang]/utils/dynamic-icon";
 import Link from "next/link";
 export default function Footer({footerData}: {footerData: FooterProps}) {
-  useEffect(() => {
-    console.log(footerData.social_medias.data)
-  }, [])
   return (
     <footer className="flex flex-col justify-center mb-4 gap-4 container" id="social">
         <p className="text-center text-font-secondary text-sm">
